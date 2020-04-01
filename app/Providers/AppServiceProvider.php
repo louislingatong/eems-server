@@ -28,5 +28,9 @@ class AppServiceProvider extends ServiceProvider
             'validResetPasswordToken',
             'App\Rules\ValidResetPasswordTokenRule@passes',
             'The :attribute is invalid.');
+        Validator::extend(
+            'validEnum',
+            'App\Rules\ValidEnumRule@passes',
+            'The selected :attribute is invalid.');
     }
 }
