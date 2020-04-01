@@ -25,4 +25,14 @@ class Club extends Model
     {
         return $this->belongsToMany('App\Employee', 'club_members');
     }
+
+    /**
+     * Get budget record associated with the club.
+     *
+     * @return mixed
+     */
+    public function budget()
+    {
+        return $this->hasOne('App\Budget');
+    }
 }
