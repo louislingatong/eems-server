@@ -13,6 +13,7 @@
 
 Route::post('users/resetPassword', 'UserController@resetPassword');
 Route::post('users/forgotPassword', 'UserController@forgotPassword');
+Route::post('clubs/join', 'ClubController@join');
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('users', 'UserController');

@@ -100,4 +100,16 @@ class ClubController extends Controller
         $filteredRequest = $request->only('employee_ids');
         return $this->clubService->addMember($filteredRequest, $club);
     }
+
+    /**
+     * Join the specified resource from storage
+     *
+     * @param  JoinClubRequest $request
+     * @return ClubResource
+     */
+    public function join(JoinClubRequest $request)
+    {
+        $filteredRequest = $request->only('club_id', 'token');
+        return $this->clubService->joinClub($filteredRequest);
+    }
 }
