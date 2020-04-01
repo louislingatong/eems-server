@@ -28,6 +28,7 @@ class ClubController extends Controller
         $this->middleware('can:view,club')->only(['show']);
         $this->middleware('can:update,club')->only(['update']);
         $this->middleware('can:forceDelete,club')->only(['destroy']);
+        $this->middleware('can:addMember,club')->only(['addMember']);
     }
 
     /**
@@ -85,5 +86,18 @@ class ClubController extends Controller
     public function destroy(Club $club)
     {
         $club->delete();
+    }
+
+    /**
+     * Add member/s to the specified resource from storage
+     *
+     * @param  AddClubMemberRequest $request
+     * @param  Club $club
+     * @return ClubResource
+     */
+    public function addMember(AddClubMemberRequest $request, Club $club)
+    {
+        $filteredRequest = $request->only('employee_ids');
+        return $this->clubService->addMember($filteredRequest, $club);
     }
 }

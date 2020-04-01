@@ -39,4 +39,21 @@ class ClubService
         $club->update($data);
         return $club;
     }
+
+    /**
+     * Add member to the given club/s.
+     *
+     * @param mixed $data
+     * @param Club $club
+     * @return String
+     */
+    public function addMember($data, $club)
+    {
+        // attach employee to the given clubs
+        $club->members()->attach($data['employee_ids']);
+
+        return response()->json([
+            'message' => 'The employee has been added to the given club successfully.'
+        ], 200);
+    }
 }

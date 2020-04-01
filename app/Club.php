@@ -15,4 +15,14 @@ class Club extends Model
         'name',
         'description'
     ];
+
+    /**
+     * Get all members associated with the club.
+     *
+     * @return mixed
+     */
+    public function members()
+    {
+        return $this->belongsToMany('App\Employee', 'club_members');
+    }
 }

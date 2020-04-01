@@ -36,4 +36,14 @@ class Employee extends Model
         return $this->belongsTo('App\Position');
     }
 
+    /**
+     * Get all clubs associated with the employee.
+     *
+     * @return mixed
+     */
+    public function clubs()
+    {
+        return $this->belongsToMany('App\Club', 'club_members');
+    }
+
 }
