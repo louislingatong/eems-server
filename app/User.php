@@ -77,4 +77,14 @@ class User extends Authenticatable
     {
         return null !== $this->roles()->where('name', $role)->first();
     }
+
+    /**
+     * Get employee record associated with the user.
+     *
+     * @return mixed
+     */
+    public function employee()
+    {
+        return $this->hasOne('App\Employee');
+    }
 }

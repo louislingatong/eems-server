@@ -15,6 +15,8 @@ Route::post('users/resetPassword', 'UserController@resetPassword');
 Route::post('users/forgotPassword', 'UserController@forgotPassword');
 
 Route::group(['middleware' => 'auth:api'], function () {
-
     Route::apiResource('users', 'UserController');
+    Route::apiResource('departments', 'DepartmentController');
+    Route::apiResource('positions', 'PositionController');
+    Route::apiResource('employees', 'EmployeeController');
 });
