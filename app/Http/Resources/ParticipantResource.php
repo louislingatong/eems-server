@@ -4,12 +4,12 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class EmployeeResource extends JsonResource
+class ParticipantResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  Request $request
+     * @param  \Illuminate\Http\Request $request
      * @return array
      */
     public function toArray($request)
@@ -27,9 +27,8 @@ class EmployeeResource extends JsonResource
             'employment_date' => $this->employment_date ? date('Y-m-d H:i:s', strtotime($this->employment_date)) : null,
             'regularization_date' => $this->regularization_date ? date('Y-m-d H:i:s', strtotime($this->regularization_date)) : null,
             'position' => new PositionResource($this->position),
-            'user' => new UserWithoutRolesResource($this->user),
-            'clubs' => ClubWithoutMembersResource::collection($this->clubs),
-            'events' => EventWithoutParticipantsResource::collection($this->events),
+            'email' => $this->user->email,
+            'event_response' => $this->pivot->event_response,
         ];
     }
 }

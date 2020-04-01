@@ -19,7 +19,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('departments', 'DepartmentController');
     Route::apiResource('positions', 'PositionController');
     Route::apiResource('employees', 'EmployeeController');
+    Route::put('employees/{employee}/responseEvent', 'EmployeeController@updateEmployeeEventResponse');
     Route::apiResource('clubs', 'ClubController');
     Route::post('clubs/{club}/addMember', 'ClubController@addMember');
     Route::apiResource('budgets', 'BudgetController');
+    Route::apiResource('events', 'EventController');
 });

@@ -46,4 +46,15 @@ class Employee extends Model
         return $this->belongsToMany('App\Club', 'club_members');
     }
 
+    /**
+     * Get all events associated with the employee.
+     *
+     * @return mixed
+     */
+    public function events()
+    {
+        return $this->belongsToMany('App\Event', 'employee_events')
+            ->withPivot('id', 'event_response');
+    }
+
 }

@@ -27,6 +27,7 @@ class EmployeeController extends Controller
         $this->middleware('can:create,App\Employee')->only(['store']);
         $this->middleware('can:view,employee')->only(['show']);
         $this->middleware('can:update,employee')->only(['update']);
+        $this->middleware('can:updateEmployeeEventResponse,employee')->only(['updateEmployeeEventResponse']);
     }
 
     /**
@@ -86,5 +87,18 @@ class EmployeeController extends Controller
     public function destroy(Employee $employee)
     {
         //
+    }
+
+    /**
+     * Update event response state.
+     *
+     * @param  UpdateEmployeeEventResponseRequest $request
+     * @param  Employee $employee
+     * @return EmployeeResource
+     */
+    public function updateEmployeeEventResponse(UpdateEmployeeEventResponseRequest $request, Employee $employee)
+    {
+        $filterRequest = $request->only(['employee_event_id', 'employee_event_response']);
+        return new EmployeeResource($this->employeeService->editEventResponse($filterRequest, $employee));
     }
 }
