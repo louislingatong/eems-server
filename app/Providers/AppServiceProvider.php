@@ -32,5 +32,9 @@ class AppServiceProvider extends ServiceProvider
             'validEnum',
             'App\Rules\ValidEnumRule@passes',
             'The selected :attribute is invalid.');
+        Validator::extend(
+            'uniqueMember',
+            'App\Rules\UniqueMemberRule@passes',
+            'The :attribute has already been taken..');
     }
 }

@@ -20,4 +20,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('positions', 'PositionController');
     Route::apiResource('employees', 'EmployeeController');
     Route::apiResource('clubs', 'ClubController');
+    Route::post('clubs/{club}/addMember', 'ClubController@addMember');
 });

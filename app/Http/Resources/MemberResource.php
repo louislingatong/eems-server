@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class EmployeeResource extends JsonResource
+class MemberResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -27,8 +27,7 @@ class EmployeeResource extends JsonResource
             'employment_date' => $this->employment_date ? date('Y-m-d H:i:s', strtotime($this->employment_date)) : null,
             'regularization_date' => $this->regularization_date ? date('Y-m-d H:i:s', strtotime($this->regularization_date)) : null,
             'position' => new PositionResource($this->position),
-            'user' => new UserWithoutRolesResource($this->user),
-            'clubs' => ClubWithoutMembersResource::collection($this->clubs),
+            'email' => $this->user->email,
         ];
     }
 }

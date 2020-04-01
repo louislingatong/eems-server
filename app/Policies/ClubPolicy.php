@@ -91,4 +91,15 @@ class ClubPolicy
     {
         return $user->authorizeRoles('administrator');
     }
+
+    /**
+     * Determine whether the user can add a member/s of the club.
+     *
+     * @param  User $user
+     * @return mixed
+     */
+    public function addMember(User $user)
+    {
+        return $user->authorizeRoles('administrator');
+    }
 }
