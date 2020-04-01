@@ -30,6 +30,7 @@ class EmployeeResource extends JsonResource
             'user' => new UserWithoutRolesResource($this->user),
             'clubs' => ClubWithoutMembersResource::collection($this->clubs),
             'events' => EventWithoutParticipantsResource::collection($this->events),
+            'announcements' => AnnouncementResource::collection($this->announcements),
         ];
     }
 }

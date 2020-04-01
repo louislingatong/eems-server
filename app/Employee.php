@@ -57,4 +57,14 @@ class Employee extends Model
             ->withPivot('id', 'event_response');
     }
 
+    /**
+     * Get all announcements associated with the employee..
+     *
+     * @return mixed
+     */
+    public function announcements()
+    {
+        return $this->belongsToMany('App\Announcement', 'employee_announcements');
+    }
+
 }
