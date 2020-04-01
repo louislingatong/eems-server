@@ -4,22 +4,20 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ClubResource extends JsonResource
+class BudgetResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return array
      */
     public function toArray($request)
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'description' => $this->description,
-            'budget' => $this->budget->amount,
-            'members' => MemberResource::collection($this->members),
+            'amount' => $this->amount,
+            'club' => new ClubWithoutMembersResource($this->club),
         ];
     }
 }
