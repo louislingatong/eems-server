@@ -56,4 +56,26 @@ class ClubService
             'message' => 'The employee has been added to the given club successfully.'
         ], 200);
     }
+
+    /**
+     * Join to the given club/s.
+     *
+     * @param mixed $data
+     * @return String
+     */
+    public function joinClub($data)
+    {
+        // retrieve club join ticket by token
+        $clubJoinTicket = ClubJoinTicket::where('token', $data['token'])->first();
+        // retrieve employee by email
+        $employees = Employee::with('user')->get()->where('user.email', $clubJoinTicket->email)->first();
+        // attach club to the employee clubs
+        Employee::find($employees->id)->first()->clubs()->attach($data['club_id']);
+        // delete club join token
+        $clubJoinTicket->delete();
+
+        return response()->json([
+            'message' => 'The employee has been added to the given club successfully.'
+        ], 200);
+    }
 }
