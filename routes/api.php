@@ -24,4 +24,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('clubs/{club}/addMember', 'ClubController@addMember');
     Route::apiResource('budgets', 'BudgetController');
     Route::apiResource('events', 'EventController');
+    Route::apiResource('announcements', 'AnnouncementController');
+    Route::post('announcements/imageUpload', 'AnnouncementController@storeTransientImage');
 });
