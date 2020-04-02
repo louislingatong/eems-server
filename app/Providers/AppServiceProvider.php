@@ -36,5 +36,9 @@ class AppServiceProvider extends ServiceProvider
             'uniqueMember',
             'App\Rules\UniqueMemberRule@passes',
             'The :attribute has already been taken..');
+        Validator::extend(
+            'validJoinClubToken',
+            'App\Rules\ValidJoinClubTokenRule@passes',
+            'The :attribute is invalid.');
     }
 }

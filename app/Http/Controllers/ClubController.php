@@ -93,7 +93,7 @@ class ClubController extends Controller
      *
      * @param  AddClubMemberRequest $request
      * @param  Club $club
-     * @return ClubResource
+     * @return mixed
      */
     public function addMember(AddClubMemberRequest $request, Club $club)
     {
@@ -105,7 +105,7 @@ class ClubController extends Controller
      * Join the specified resource from storage
      *
      * @param  JoinClubRequest $request
-     * @return ClubResource
+     * @return mixed
      */
     public function join(JoinClubRequest $request)
     {

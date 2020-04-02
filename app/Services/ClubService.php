@@ -45,7 +45,7 @@ class ClubService
      *
      * @param mixed $data
      * @param Club $club
-     * @return String
+     * @return mixed
      */
     public function addMember($data, $club)
     {
@@ -61,7 +61,7 @@ class ClubService
      * Join to the given club/s.
      *
      * @param mixed $data
-     * @return String
+     * @return mixed
      */
     public function joinClub($data)
     {
