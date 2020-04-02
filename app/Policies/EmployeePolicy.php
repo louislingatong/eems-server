@@ -91,4 +91,27 @@ class EmployeePolicy
     {
         //
     }
+
+    /**
+     * Determine whether the user can update the employee event response.
+     *
+     * @param  User $user
+     * @param  Employee $employee
+     * @return mixed
+     */
+    public function updateEmployeeEventResponse(User $user, Employee $employee)
+    {
+        return $user->authorizeRoles('administrator') || $user->id === $employee->user_id;
+    }
+
+    /**
+     * Determine whether the user can issue join club tickets.
+     *
+     * @param  User $user
+     * @return mixed
+     */
+    public function issueJoinClubTickets(User $user)
+    {
+        return $user->authorizeRoles('administrator');
+    }
 }
