@@ -114,4 +114,5 @@ class EmployeePolicy
     {
         return $user->authorizeRoles('administrator');
     }
+
 }
