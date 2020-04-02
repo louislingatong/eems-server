@@ -4,6 +4,12 @@ This is a backend version of the EEMS (Employee Engagement Management System) ap
 
 This is using a **Laravel Framework** working for **Homestead**.
 
+## Entity Relationship Diagram
+![alt ERD](ERD.png)
+
+## API Documentation
+[See api documentation](https://documenter.getpostman.com/view/2303765/SVSKKTVa)
+
 ## Running the application locally
 
 ### Requirements
