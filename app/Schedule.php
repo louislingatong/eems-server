@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EventSchedule extends Model
+class Schedule extends Model
 {
     /**
      * The attributes that are mass assignable.
