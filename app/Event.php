@@ -43,6 +43,6 @@ class Event extends Model
      */
     public function schedules()
     {
-        return $this->hasMany('App\EventSchedule');
+        return $this->hasMany('App\Schedule');
     }
 }
