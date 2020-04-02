@@ -27,4 +27,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('events', 'EventController');
     Route::apiResource('announcements', 'AnnouncementController');
     Route::post('announcements/imageUpload', 'AnnouncementController@storeTransientImage');
+    Route::apiResource('liquidations', 'LiquidationController');
 });

@@ -45,4 +45,14 @@ class Event extends Model
     {
         return $this->hasMany('App\EventSchedule');
     }
+
+    /**
+     * Get liquidation record associated with the event.
+     *
+     * @return mixed
+     */
+    public function liquidation()
+    {
+        return $this->hasOne('App\Liquidation');
+    }
 }
