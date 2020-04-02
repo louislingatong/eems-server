@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Password Reset Request</title>
+    <title>Club Registration Request</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
@@ -13,13 +13,13 @@
     <br>
     <br>
     <br>
-    To reset your password, 
-    <a class="btn btn-primary" href="{{ env('FE_URL') }}/password-reset-finish?token={{$token}}">
+    To join a club,
+    <a class="btn btn-primary" href="{{ env('FE_URL') }}/club-registration-finish?token={{$token}}">
         click here.
     </a>
     <br>
     <br>
-    If you did not request a password reset, please ignore this message.
+    If you don't want to join a club, please ignore this message.
     <br>
     <br>
     <br>

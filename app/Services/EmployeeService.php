@@ -2,10 +2,13 @@
 
 namespace App\Services;
 
+use App\ClubJoinTicket;
 use App\Employee;
 use App\Mail\AccountVerificationMail;
+use App\Mail\ClubRegistrationMail;
 use App\PasswordResetTicket;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -105,4 +108,40 @@ class EmployeeService
         return $employee;
     }
 
+    /**
+     * Add new join club tickets.
+     *
+     * @return mixed
+     * @throws
+     */
+    public function addJoinClubTickets()
+    {
+        DB::beginTransaction();
+
+        try {
+            $issuer_id = Auth::id();
+
+            Employee::all()
+                ->where('user_id', '!=', $issuer_id)
+                ->map(function ($employee) {
+                    $data['token'] = str_random(60);
+                    $data['email'] = $employee->user()->first()->email;
+
+                    $clubJoinTicket = ClubJoinTicket::create($data);
+
+                    Mail::to($clubJoinTicket->email)->send(new ClubRegistrationMail($clubJoinTicket->token));
+                });
+
+            DB::commit();
+
+            return response()->json([
+                'message' => 'A join club ticket was sent to all employees.'
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
+        }
+    }
+  
 }

@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Employee;
 use App\Http\Requests\CreateEmployeeRequest;
+use App\Http\Requests\IssueJoinClubTicketsRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeEventResponseRequest;
 use App\Http\Resources\EmployeeResource;
 use App\Services\EmployeeService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Request;
 
 class EmployeeController extends Controller
 {
@@ -28,6 +30,7 @@ class EmployeeController extends Controller
         $this->middleware('can:view,employee')->only(['show']);
         $this->middleware('can:update,employee')->only(['update']);
         $this->middleware('can:updateEmployeeEventResponse,employee')->only(['updateEmployeeEventResponse']);
+        $this->middleware('can:issueJoinClubTickets,App\Employee')->only(['issueJoinClubTickets']);
     }
 
     /**
@@ -100,5 +103,15 @@ class EmployeeController extends Controller
     {
         $filterRequest = $request->only(['employee_event_id', 'employee_event_response']);
         return new EmployeeResource($this->employeeService->editEventResponse($filterRequest, $employee));
+    }
+
+    /**
+     * Issue join club ticket to all employees.
+     *
+     * @return mixed
+     */
+    public function issueJoinClubTickets()
+    {
+        return $this->employeeService->addJoinClubTickets();
     }
 }
