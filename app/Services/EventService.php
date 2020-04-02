@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Employee;
 use App\Event;
-use App\EventSchedule;
+use App\Schedule;
 use App\Mail\EventMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -40,7 +40,7 @@ class EventService
             // create event schedule
             foreach ($data['schedules'] as $key => $value) {
                 $value['event_id'] = $event->id;
-                EventSchedule::create($value);
+                Schedule::create($value);
             }
             // check if recipients is array and retrieve employee by email
             if (is_array($data['recipients'])) {
@@ -90,7 +90,7 @@ class EventService
             // create event schedule
             foreach ($data['schedules'] as $key => $value) {
                 $value['event_id'] = $event->id;
-                EventSchedule::create($value);
+                Schedule::create($value);
             }
             // initialize email details
             $details = [
