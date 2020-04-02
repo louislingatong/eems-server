@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class EventResource extends JsonResource
+class EventWithoutLiquidationResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,7 +22,6 @@ class EventResource extends JsonResource
             'location' => $this->location,
             'participants' => ParticipantResource::collection($this->participants),
             'event_status' => $this->event_status,
-            'liquidation' => new LiquidationWithoutEventResource($this->liquidation)
         ];
     }
 }
