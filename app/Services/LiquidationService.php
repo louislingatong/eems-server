@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Liquidation;
-use App\LiquidationExpense;
+use App\Expense;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -37,7 +37,7 @@ class LiquidationService
             // create liquidation expense
             foreach ($data['expenses'] as $key => $value) {
                 $value['liquidation_id'] = $liquidation->id;
-                LiquidationExpense::create($value);
+                Expense::create($value);
             }
 
             DB::commit();
@@ -70,7 +70,7 @@ class LiquidationService
             // create liquidation expense
             foreach ($data['expenses'] as $key => $value) {
                 $value['liquidation_id'] = $liquidation->id;
-                LiquidationExpense::create($value);
+                Expense::create($value);
             }
 
             DB::commit();

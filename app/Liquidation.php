@@ -33,7 +33,7 @@ class Liquidation extends Model
      */
     public function expenses()
     {
-        return $this->hasMany('App\LiquidationExpense');
+        return $this->hasMany('App\Expense');
     }
 
     /**
