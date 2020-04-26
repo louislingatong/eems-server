@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class AlterEmployeesTableAddForeignKeyPositionId extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('employees', function (Blueprint $table) {
+            $table->foreign('position_id')
+                ->references('id')
+                ->on('positions');
         });
     }
 
@@ -30,6 +27,8 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::table('employees', function (Blueprint $table) {
+            $table->dropForeign(['position_id']);
+        });
     }
 }
