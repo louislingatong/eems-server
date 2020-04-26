@@ -3,12 +3,13 @@
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +17,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
     ];
 
     /**
@@ -25,15 +28,57 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
     ];
 
     /**
-     * The attributes that should be cast to native types.
+     * Get all roles associated with the user.
      *
-     * @var array
+     * @return mixed
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role', 'user_roles');
+    }
+
+    /**
+     * Get employee record associated with the user.
+     *
+     * @return mixed
+     */
+    public function employee()
+    {
+        return $this->hasOne('App\Employee');
+    }
+
+    /**
+     * Get all clubs associated with the user.
+     *
+     * @return mixed
+     */
+    public function clubs()
+    {
+        return $this->belongsToMany('App\Club', 'club_members');
+    }
+
+    /**
+     * Get all events associated with the user.
+     *
+     * @return mixed
+     */
+    public function events()
+    {
+        return $this->belongsToMany('App\Event', 'event_participants')
+            ->withPivot('id', 'event_response');
+    }
+
+    /**
+     * Get all announcements associated with the user..
+     *
+     * @return mixed
+     */
+    public function announcements()
+    {
+        return $this->belongsToMany('App\Announcement', 'announcement_recipients');
+    }
 }
