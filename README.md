@@ -50,12 +50,12 @@ keys:
     - ~/.ssh/id_rsa
 
 folders:
-    - map: C:/Development/eems-rest
-      to: /home/vagrant/eems-rest
+    - map: C:/Development/eems-server
+      to: /home/vagrant/eems-server
 
 sites:
-    - map: eems.local
-      to: /home/vagrant/eems-rest/public
+    - map: eems-server.local
+      to: /home/vagrant/eems-server/public
 
 databases:
     - eems
