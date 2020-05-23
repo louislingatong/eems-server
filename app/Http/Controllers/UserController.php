@@ -84,21 +84,28 @@ class UserController extends Controller
      * Reset password of the specified resource.
      *
      * @param ResetPasswordRequest $request
+     * @return mixed
      */
     public function resetPassword(ResetPasswordRequest $request)
     {
         $filteredRequest = $request->only('new_password', 'token');
-        $this->userService->resetPassword($filteredRequest);
+        return $this->userService->resetPassword($filteredRequest);
     }
 
     /**
      * Request password reset.
      *
      * @param ForgotPasswordRequest $request
+     * @return mixed
      */
     public function forgotPassword(ForgotPasswordRequest $request)
     {
         $filteredRequest = $request->only('email');
-        $this->userService->sendPasswordResetLink($filteredRequest);
+        return $this->userService->sendPasswordResetLink($filteredRequest);
+    }
+
+    public function me(Request $request)
+    {
+        return new UserResource($request->user());
     }
 }

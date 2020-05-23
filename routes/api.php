@@ -11,8 +11,8 @@
 |
 */
 
-Route::post('users/resetPassword', 'UserController@resetPassword');
-Route::post('users/forgotPassword', 'UserController@forgotPassword');
+Route::post('auth/resetPassword', 'UserController@resetPassword');
+Route::post('auth/forgotPassword', 'UserController@forgotPassword');
 Route::post('clubs/join', 'ClubController@join');
 
 Route::group(['middleware' => 'auth:api'], function () {
@@ -29,4 +29,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('announcements', 'AnnouncementController');
     Route::post('announcements/imageUpload', 'AnnouncementController@storeTransientImage');
     Route::apiResource('liquidations', 'LiquidationController');
+    Route::delete('auth/token', 'Auth\TokenController@destroy');
+    Route::get('me', 'UserController@me');
 });

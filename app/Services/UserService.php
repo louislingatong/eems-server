@@ -23,25 +23,41 @@ class UserService
      * Reset the given user's password.
      *
      * @param mixed $data
-     * @throws
+     * @return mixed
      */
     public function resetPassword($data)
     {
-        // retrieve password reset ticket by token
-        $passwordResetTicket = PasswordResetTicket::where('token', $data['token'])->first();
-        // retrieve user by email
-        $users = User::where('email', $passwordResetTicket->email)->first();
-        // update user password
-        $users->update(['password' => Hash::make($data['new_password'])]);
-        // delete password reset
-        $passwordResetTicket->delete();
+        DB::beginTransaction();
+
+        try {
+            // retrieve password reset ticket by token
+            $passwordResetTicket = PasswordResetTicket::where('token', $data['token'])->first();
+            // retrieve user by email
+            $users = User::where('email', $passwordResetTicket->email)->first();
+            // update user password
+            $users->update(['password' => Hash::make($data['new_password'])]);
+            // delete password reset
+            $passwordResetTicket->delete();
+
+            DB::commit();
+
+            return response()->json([
+                'message' => 'Reset password successfully.'
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return response()->json([
+                'message' => $e->getMessage()
+            ], $e->getCode());
+        }
     }
 
     /**
      * Send a password reset link to the given user.
      *
      * @param mixed $data
-     * @throws \Exception
+     * @return mixed
      */
     public function sendPasswordResetLink($data)
     {
@@ -55,10 +71,16 @@ class UserService
             Mail::to($passwordResetTicket->email)->send(new PasswordResetMail($passwordResetTicket->token));
 
             DB::commit();
+
+            return response()->json([
+                'message' => 'Password reset link was sent to you email.'
+            ], 200);
         } catch (\Exception $e) {
             DB::rollback();
 
-            throw $e;
+            return response()->json([
+                'message' => $e->getMessage()
+            ], $e->getCode());
         }
     }
 }

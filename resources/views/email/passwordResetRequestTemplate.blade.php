@@ -14,7 +14,7 @@
     <br>
     <br>
     To reset your password, 
-    <a class="btn btn-primary" href="{{ env('FE_URL') }}/password-reset-finish?token={{$token}}">
+    <a class="btn btn-primary" href="{{ env('FE_URL') }}/reset-password/{{ $token }}">
         click here.
     </a>
     <br>
